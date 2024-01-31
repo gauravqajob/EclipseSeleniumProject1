@@ -1,5 +1,6 @@
 package firstDemoTest;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
@@ -21,11 +22,12 @@ public class firstDemoSeleniumCode
  {
 	 WebDriverManager.chromedriver().setup();
      driver = new ChromeDriver();
-     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 	} 
 
  @Test
- public void valid_UserCredential(){
+ public void valid_UserCredential()
+ {
 
 	 System.out.println("Starting test " + new Object(){}.getClass().getEnclosingMethod().getName());
      driver.get("https://demoqa.com/text-box");	
