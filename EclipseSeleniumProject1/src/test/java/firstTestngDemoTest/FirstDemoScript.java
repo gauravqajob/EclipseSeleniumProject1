@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -27,6 +28,36 @@ public class FirstDemoScript
 	     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 	     driver.get("https://demoqa.com/automation-practice-form");
 		driver.manage().window().maximize();
+		Thread.sleep(2000);
+		String actualTitle = driver.getTitle();
+		Boolean flag=false;
+		String expectedTitle = "DEMOQA";
+		if(actualTitle.equalsIgnoreCase(expectedTitle))
+		{
+			flag=true;
+		}
+		SoftAssert sa=new SoftAssert();
+		if(flag)
+		{
+			sa.assertEquals(actualTitle, expectedTitle);
+			System.out.println("Assertion passed");
+		}
+		else 
+		{
+			sa.assertEquals(actualTitle, expectedTitle);
+			System.out.println("Assertion failed");
+		}
+//		if(flag)
+//		{
+//			Assert.assertEquals(expectedTitle, actualTitle);
+//			System.out.println("Assertion passed");
+//		}
+//		else 
+//		{
+//			Assert.assertEquals(expectedTitle, actualTitle);
+//			System.out.println("Assertion failed");
+//		}
+		
 		Thread.sleep(2000);
 	     WebElement scrollDown=driver.findElement(By.xpath("//*[@id=\"app\"]//div[@class='accordion']/div[3]/span"));
 	     JavascriptExecutor js=(JavascriptExecutor) driver;
@@ -55,6 +86,8 @@ public class FirstDemoScript
 		   
 	   }
 	     System.out.println("Ending test " + new Object(){}.getClass().getEnclosingMethod().getName());
+	     driver.close();
+	   sa.assertAll();
 	 
 //		String actualUrl = "https://live.browserstack.com/dashboard";
 //		String expectedUrl = driver.getCurrentUrl();
